@@ -223,6 +223,109 @@
       .tool-link:hover {
         background: #0085cc;
       }
+
+      /* Media Queries para responsividad */
+      @media (max-width: 1024px) {
+        .grid-container {
+          grid-template-columns: repeat(2, 1fr);
+          padding: 0 20px;
+        }
+
+        .tools-content {
+          margin: 20px;
+          width: auto;
+        }
+
+        .pros-cons {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 10px;
+        }
+
+        h1 {
+          font-size: 24px;
+          margin-bottom: 20px;
+        }
+
+        .grid-container {
+          grid-template-columns: 1fr;
+          gap: 15px;
+        }
+
+        .card {
+          height: 150px;
+        }
+
+        .tools-content {
+          margin: 10px;
+          padding: 15px;
+        }
+
+        .tool-item {
+          padding: 15px;
+        }
+
+        .tool-header h3 {
+          font-size: 18px;
+        }
+
+        .tool-content {
+          font-size: 14px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .card-front h2,
+        .card-back p {
+          font-size: 14px;
+        }
+
+        .tool-item {
+          padding: 10px;
+        }
+
+        .pros-cons {
+          margin: 10px 0;
+        }
+
+        .pros,
+        .cons {
+          padding: 10px;
+        }
+
+        .tool-header h3 {
+          font-size: 16px;
+        }
+
+        .close-button {
+          font-size: 20px;
+          top: 5px;
+          right: 5px;
+        }
+      }
+
+      /* Mejoras de accesibilidad táctil */
+      @media (hover: none) {
+        .card:hover .card-inner {
+          transform: none;
+        }
+
+        .card:active .card-inner {
+          transform: rotateY(180deg);
+        }
+
+        .tool-header,
+        .close-button,
+        .tool-link {
+          padding: 12px;
+          min-height: 44px;
+        }
+      }
     </style>
   </head>
   <body>
