@@ -124,19 +124,104 @@
 
       .tool-item {
         background: #3d3d3d;
+        margin: 20px 0;
+        padding: 25px;
+        border-radius: 10px;
+      }
+
+      .tool-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+      }
+
+      .tool-header h3 {
+        margin: 0;
+      }
+
+      .tool-content {
+        display: none;
+        margin-top: 20px;
+      }
+
+      .tool-content.active {
+        display: block;
+      }
+
+      .collapse-btn {
+        background: none;
+        border: none;
+        color: #00a6ff;
+        font-size: 24px;
+        cursor: pointer;
+        transition: transform 0.3s;
+      }
+
+      .collapse-btn.active {
+        transform: rotate(180deg);
+      }
+
+      .tool-item h3 {
+        color: #00a6ff;
+        margin: 0 0 15px 0;
+        font-size: 1.4em;
+      }
+
+      .tool-section {
+        margin: 15px 0;
+      }
+
+      .tool-section h4 {
+        color: #00a6ff;
         margin: 10px 0;
+        font-size: 1.1em;
+      }
+
+      .pros-cons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin: 15px 0;
+      }
+
+      .pros,
+      .cons {
+        background: #2d2d2d;
         padding: 15px;
         border-radius: 5px;
       }
 
-      .tool-item h3 {
-        margin: 0 0 10px 0;
-        color: #00a6ff;
+      .pros h4 {
+        color: #4caf50;
       }
 
-      .tool-item p {
-        margin: 0;
-        font-size: 0.9em;
+      .cons h4 {
+        color: #f44336;
+      }
+
+      .considerations ul {
+        list-style-type: none;
+        padding-left: 0;
+      }
+
+      .considerations li {
+        margin: 8px 0;
+      }
+
+      .tool-link {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 10px 20px;
+        background: #00a6ff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background 0.3s;
+      }
+
+      .tool-link:hover {
+        background: #0085cc;
       }
     </style>
   </head>
@@ -279,32 +364,136 @@
       const toolsData = {
         "Diseño y Creatividad": [
           {
+            name: "Canva",
+            descripcionBreve:
+              "Herramienta de diseño gráfico para crear presentaciones, gráficos y contenido visual.",
+            proposito:
+              "Facilitar la creación de contenido visual atractivo y profesional sin necesidad de habilidades de diseño avanzadas.",
+            tipoSesiones:
+              "Presentaciones, infografías, gráficos, redes sociales.",
+            pros: [
+              "Fácil de usar, sin necesidad de habilidades de diseño",
+              "Gran cantidad de plantillas y elementos gráficos",
+              "Colaboración en tiempo real",
+              "Integración con otras herramientas",
+            ],
+            contras: [
+              "Funcionalidades limitadas en la versión gratuita",
+              "Algunas plantillas y elementos son de pago",
+              "Menos flexible que herramientas profesionales de diseño",
+            ],
+            consideraciones: {
+              cuandoUsar:
+                "Ideal para crear contenido visual rápido y atractivo",
+              requiereAprendizaje: "No, intuitivo y fácil de usar",
+              usuarios: "Ilimitados en plan Enterprise, 1 en plan gratuito",
+              licencia: "Tiene versión gratuita y planes pagos",
+              entorno: "Funciona mejor en entornos virtuales e híbridos",
+              versionGratuita:
+                "Plantillas y elementos básicos, colaboración limitada a 1 usuario, sin integraciones avanzadas",
+            },
+            ejemploUso:
+              "Creación de presentaciones, infografías, gráficos para redes sociales",
+            link: "https://www.canva.com",
+          },
+          {
+            name: "Prezi",
+            descripcionBreve:
+              "Herramienta de presentaciones no lineales con zoom y efectos visuales.",
+            proposito:
+              "Crear presentaciones dinámicas y visualesmente atractivas.",
+            tipoSesiones: "Presentaciones, storytelling, demostraciones.",
+            pros: [
+              "Presentaciones no lineales y dinámicas",
+              "Efectos visuales y de zoom atractivos",
+              "Facilidad para compartir y presentar",
+              "Colaboración en tiempo real",
+            ],
+            contras: [
+              "Curva de aprendizaje inicial",
+              "Menos control sobre el diseño que PowerPoint",
+              "Algunas funcionalidades avanzadas en planes de pago",
+            ],
+            consideraciones: {
+              cuandoUsar: "Ideal para presentaciones creativas y no lineales",
+              requiereAprendizaje: "Sí, curva de aprendizaje inicial",
+              usuarios: "Ilimitados en plan Premium, 1 en plan gratuito",
+              licencia: "Tiene versión gratuita y planes pagos",
+              entorno: "Funciona mejor en entornos virtuales e híbridos",
+              versionGratuita:
+                "Funcionalidades básicas, presentaciones públicas, sin colaboración avanzada",
+            },
+            ejemploUso:
+              "Presentaciones creativas, storytelling, demostraciones",
+            link: "https://prezi.com",
+          },
+          {
+            name: "Lucidchart",
+            descripcionBreve:
+              "Herramienta de diagramación y visualización de datos en línea.",
+            proposito: "Crear diagramas, mapas mentales y flujos de trabajo.",
+            tipoSesiones: "Diagramas de flujo, mapas mentales, wireframes.",
+            pros: [
+              "Amplia variedad de plantillas y formas",
+              "Colaboración en tiempo real",
+              "Integración con otras herramientas",
+              "Facilidad para compartir y exportar",
+            ],
+            contras: [
+              "Algunas funcionalidades avanzadas en planes de pago",
+              "Curva de aprendizaje inicial para usuarios nuevos",
+              "Interfaz puede ser abrumadora para proyectos complejos",
+            ],
+            consideraciones: {
+              cuandoUsar:
+                "Ideal para diagramas y visualizaciones de datos colaborativas",
+              requiereAprendizaje: "Sí, curva de aprendizaje inicial",
+              usuarios: "Ilimitados en plan Enterprise, 3 en plan gratuito",
+              licencia: "Tiene versión gratuita y planes pagos",
+              entorno: "Funciona mejor en entornos virtuales e híbridos",
+              versionGratuita:
+                "Funcionalidades básicas, colaboración limitada a 3 usuarios, sin integraciones avanzadas",
+            },
+            ejemploUso: "Diagramas de flujo, mapas mentales, wireframes",
+            link: "https://www.lucidchart.com",
+          },
+          {
             name: "Miro",
-            description:
-              "Pizarra digital colaborativa para lluvia de ideas y diseño visual.",
+            descripcionBreve:
+              "Pizarra digital colaborativa infinita para trabajo visual y creativo.",
+            proposito:
+              "Facilitar la colaboración visual en tiempo real, ideal para brainstorming, mapas mentales, y diseño colaborativo.",
+            tipoSesiones:
+              "Talleres de ideación, sesiones de planificación estratégica, retrospectivas, mapeo de procesos.",
+            pros: [
+              "Altamente flexible y versátil",
+              "Excelente para colaboración en tiempo real",
+              "Gran cantidad de plantillas prediseñadas",
+              "Buena integración con otras herramientas",
+            ],
+            contras: [
+              "Curva de aprendizaje inicial",
+              "Versión gratuita limitada",
+              "Puede ser abrumador para usuarios nuevos",
+            ],
+            consideraciones: {
+              cuandoUsar:
+                "Ideal para sesiones que requieren mucha colaboración visual y creatividad",
+              requiereAprendizaje: "Sí, requiere familiarización previa",
+              usuarios:
+                "Ilimitados en plan Enterprise, hasta 100 en otros planes",
+              licencia: "Tiene versión gratuita y planes pagos",
+              entorno: "Funciona mejor en entornos virtuales e híbridos",
+              versionGratuita:
+                "3 pizarras, plantillas básicas, colaboración en tiempo real limitada a 3 editores, sin integraciones avanzadas",
+            },
+            ejemploUso:
+              "Workshop de Design Thinking, sesiones de planificación trimestral, mapeo de experiencia del usuario",
             link: "https://miro.com",
           },
-          {
-            name: "Figma",
-            description: "Herramienta de diseño colaborativo en tiempo real.",
-            link: "https://figma.com",
-          },
+          // Añadir más herramientas...
         ],
-        "Gestión de Proyecto": [
-          {
-            name: "Trello",
-            description:
-              "Gestión de tareas y proyectos con metodología Kanban.",
-            link: "https://trello.com",
-          },
-          {
-            name: "Asana",
-            description:
-              "Plataforma completa para gestión de proyectos y equipos.",
-            link: "https://asana.com",
-          },
-        ],
-        // Añadir más categorías según necesites
+        // Añadir más categorías...
       };
 
       function showTools(category) {
@@ -319,9 +508,78 @@
         tools.forEach((tool) => {
           toolsList.innerHTML += `
             <div class="tool-item">
-              <h3>${tool.name}</h3>
-              <p>${tool.description}</p>
-              <a href="${tool.link}" target="_blank" style="color: #00a6ff;">Visitar sitio</a>
+              <div class="tool-header" onclick="toggleTool(this)">
+                <h3>${tool.name}</h3>
+                <button class="collapse-btn">▼</button>
+              </div>
+              
+              <div class="tool-content">
+                <div class="tool-section">
+                  <p><strong>Descripción Breve:</strong> ${
+                    tool.descripcionBreve
+                  }</p>
+                </div>
+
+                <div class="tool-section">
+                  <h4>Propósito</h4>
+                  <p>${tool.proposito}</p>
+                </div>
+
+                <div class="tool-section">
+                  <h4>Tipos de Sesiones</h4>
+                  <p>${tool.tipoSesiones}</p>
+                </div>
+
+                <div class="pros-cons">
+                  <div class="pros">
+                    <h4>Pros</h4>
+                    <ul>
+                      ${tool.pros.map((pro) => `<li>${pro}</li>`).join("")}
+                    </ul>
+                  </div>
+                  <div class="cons">
+                    <h4>Contras</h4>
+                    <ul>
+                      ${tool.contras
+                        .map((contra) => `<li>${contra}</li>`)
+                        .join("")}
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="tool-section considerations">
+                  <h4>Consideraciones Clave</h4>
+                  <ul>
+                    <li><strong>¿Cuándo usar?:</strong> ${
+                      tool.consideraciones.cuandoUsar
+                    }</li>
+                    <li><strong>¿Requiere aprendizaje?:</strong> ${
+                      tool.consideraciones.requiereAprendizaje
+                    }</li>
+                    <li><strong>Usuarios soportados:</strong> ${
+                      tool.consideraciones.usuarios
+                    }</li>
+                    <li><strong>Licencia:</strong> ${
+                      tool.consideraciones.licencia
+                    }</li>
+                    <li><strong>Mejor en entornos:</strong> ${
+                      tool.consideraciones.entorno
+                    }</li>
+                    <li><strong>Versión gratuita incluye:</strong> ${
+                      tool.consideraciones.versionGratuita
+                    }</li>
+                  </ul>
+                </div>
+
+                <div class="tool-section">
+                  <h4>Ejemplo de Uso</h4>
+                  <p>${tool.ejemploUso}</p>
+                </div>
+
+                <a href="${
+                  tool.link
+                }" target="_blank" class="tool-link">Visitar sitio</a>
+              </div>
             </div>
           `;
         });
@@ -329,8 +587,12 @@
         overlay.style.display = "block";
       }
 
-      function closeToolsOverlay() {
-        document.getElementById("toolsOverlay").style.display = "none";
+      function toggleTool(header) {
+        const content = header.nextElementSibling;
+        const button = header.querySelector(".collapse-btn");
+
+        content.classList.toggle("active");
+        button.classList.toggle("active");
       }
 
       // Modificar los event listeners de las cards
