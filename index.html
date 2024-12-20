@@ -137,7 +137,29 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        gap: 15px;
         cursor: pointer;
+      }
+
+      .tool-header-content {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        flex: 1;
+      }
+
+      .tool-logo {
+        width: 32px;
+        height: 32px;
+        object-fit: contain;
+        border-radius: 4px;
+      }
+
+      @media (max-width: 480px) {
+        .tool-logo {
+          width: 24px;
+          height: 24px;
+        }
       }
 
       .tool-header h3 {
@@ -760,7 +782,7 @@
             link: "https://www.atlassian.com/software/jira",
           },
           {
-            name: "Monday.com",
+            name: "Monday",
             descripcionBreve:
               "Plataforma de trabajo colaborativo y gestión de proyectos.",
             proposito:
@@ -1258,7 +1280,7 @@
             link: "https://kahoot.com",
           },
           {
-            name: "Menti",
+            name: "Mentimeter",
             descripcionBreve:
               "Plataforma de encuestas y votaciones en tiempo real.",
             proposito:
@@ -1287,7 +1309,7 @@
                 "Hasta 5 presentaciones, encuestas y votaciones en vivo, sin funcionalidades avanzadas",
             },
             ejemploUso: "Encuestas en vivo, votaciones, preguntas abiertas",
-            link: "https://www.menti.com",
+            link: "https://www.mentimeter.com",
           },
           {
             name: "Hyper Island Toolbox",
@@ -1523,7 +1545,7 @@
         // Añadir más categorías...
       };
 
-      function showTools(category) {
+      async function showTools(category) {
         const overlay = document.getElementById("toolsOverlay");
         const title = document.getElementById("categoryTitle");
         const toolsList = document.getElementById("toolsList");
@@ -1532,11 +1554,19 @@
         toolsList.innerHTML = "";
 
         const tools = toolsData[category] || [];
-        tools.forEach((tool) => {
+        for (const tool of tools) {
+          const logoUrl = await getToolLogo(tool.name);
+          const logoHtml = logoUrl
+            ? `<img src="${logoUrl}" alt="${tool.name} logo" class="tool-logo">`
+            : "";
+
           toolsList.innerHTML += `
             <div class="tool-item">
               <div class="tool-header" onclick="toggleTool(this)">
-                <h3>${tool.name}</h3>
+                <div class="tool-header-content">
+                  ${logoHtml}
+                  <h3>${tool.name}</h3>
+                </div>
                 <button class="collapse-btn">▼</button>
               </div>
 
@@ -1609,9 +1639,56 @@
               </div>
             </div>
           `;
-        });
+        }
 
         overlay.style.display = "block";
+      }
+
+      function getToolLogo(toolName) {
+        const logoFileName = toolName.toLowerCase().replace(/[.\s]/g, "-");
+        const pngLogos = [
+          "canva",
+          "prezi",
+          "miro",
+          "lucidchart",
+          "miro",
+          "trello",
+          "asana",
+          "jira",
+          "monday",
+          "mentimeter",
+          "slido",
+          "poll-everywhere",
+          "google-workspace",
+          "microsoft-onedrive",
+          "dropbox",
+          "mural",
+          "notion",
+          "zoom",
+          "microsoft-teams",
+          "slack",
+          "discord",
+          "google-meet",
+          "kahoot",
+          "hyper-island-toolbox",
+          "liberating-structures",
+          "retromat",
+          "funretrospectives",
+          "google-docs",
+          "microsoft-word-online",
+        ];
+
+        // Determinar la extensión del archivo
+        const extension = pngLogos.includes(logoFileName) ? "png" : "svg";
+        const logoPath = `assets/logos/${logoFileName}.${extension}`;
+
+        // Verificar si el archivo existe
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.onload = () => resolve(logoPath);
+          img.onerror = () => resolve(null);
+          img.src = logoPath;
+        });
       }
 
       function toggleTool(header) {
