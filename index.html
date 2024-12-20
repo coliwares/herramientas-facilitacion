@@ -590,9 +590,40 @@
       function toggleTool(header) {
         const content = header.nextElementSibling;
         const button = header.querySelector(".collapse-btn");
+        const toolItem = header.closest(".tool-item");
+        const isExpanded = content.classList.contains("active");
 
-        content.classList.toggle("active");
-        button.classList.toggle("active");
+        // Colapsar todos los demás
+        const allTools = document.querySelectorAll(".tool-item");
+        allTools.forEach((item) => {
+          const otherContent = item.querySelector(".tool-content");
+          const otherButton = item.querySelector(".collapse-btn");
+          otherContent.classList.remove("active");
+          otherButton.classList.remove("active");
+        });
+
+        // Si no estaba expandido, expandirlo
+        if (!isExpanded) {
+          content.classList.add("active");
+          button.classList.add("active");
+        }
+      }
+
+      function closeToolsOverlay() {
+        // Ocultar el overlay
+        document.getElementById("toolsOverlay").style.display = "none";
+
+        // Colapsar todas las herramientas abiertas
+        const allTools = document.querySelectorAll(".tool-item");
+        allTools.forEach((item) => {
+          const content = item.querySelector(".tool-content");
+          const button = item.querySelector(".collapse-btn");
+          if (content) content.classList.remove("active");
+          if (button) button.classList.remove("active");
+        });
+
+        // Limpiar el contenido
+        document.getElementById("toolsList").innerHTML = "";
       }
 
       // Modificar los event listeners de las cards
