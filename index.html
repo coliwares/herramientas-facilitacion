@@ -1,51 +1,345 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Herramientas de Facilitación</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      background: #f7f7f7;
-    }
-    h1 {
-      color: #333;
-    }
-    ul {
-      list-style-type: square;
-      padding-left: 20px;
-    }
-    li {
-      margin-bottom: 10px;
-    }
-    a {
-      color: #0066cc;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-  </style>
-</head>
-<body>
-  <h1>Herramientas para Facilitaciones</h1>
-  <p>Este es un listado sencillo de herramientas que pueden ayudar a planificar y ejecutar facilitaciones (talleres, reuniones, dinámicas de grupo).</p>
-  
-  <h2>Listado de Herramientas</h2>
-  <ul>
-    <li><a href="https://www.mural.co/" target="_blank">Mural</a>: Herramienta colaborativa para pizarras virtuales.</li>
-    <li><a href="https://miro.com/" target="_blank">Miro</a>: Espacio de trabajo en línea para brainstorming y mapas mentales.</li>
-    <li><a href="https://trello.com/" target="_blank">Trello</a>: Gestión simple de tareas y flujos de trabajo.</li>
-    <li><a href="https://www.mentimeter.com/" target="_blank">Mentimeter</a>: Creación de encuestas y actividades interactivas en vivo.</li>
-    <li><a href="https://jamboard.google.com/" target="_blank">Google Jamboard</a>: Pizarra digital colaborativa integrada con Google Workspace.</li>
-  </ul>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ToolBox de Facilitación</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #1a1a1a;
+      }
 
-  <h2>Recursos Adicionales</h2>
-  <ul>
-    <li><a href="https://www.youtube.com/results?search_query=facilitacion+de+talleres" target="_blank">Videos sobre Facilitación</a>: Ejemplos prácticos en YouTube.</li>
-    <li><a href="https://www.sessionlab.com/library/" target="_blank">SessionLab Library</a>: Biblioteca de actividades y ejercicios de facilitación.</li>
-  </ul>
-</body>
+      h1 {
+        text-align: center;
+        color: #ffffff;
+        margin-bottom: 40px;
+      }
+
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .card {
+        background: transparent;
+        padding: 0;
+        border-radius: 10px;
+        height: 200px;
+        width: 100%;
+        perspective: 1000px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .card:active .card-front,
+      .card:active .card-back {
+        box-shadow: 0 0 20px rgba(0, 150, 255, 0.5);
+        border: 2px solid #00a6ff;
+        transform: scale(1.02);
+      }
+
+      .card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.8s;
+        transform-style: preserve-3d;
+        transform-origin: center;
+      }
+
+      .card:hover .card-inner {
+        transform: rotateY(180deg);
+      }
+
+      .card-front,
+      .card-back {
+        position: absolute;
+        width: calc(100% - 44px); /* Ajustado para el nuevo borde */
+        height: calc(100% - 44px); /* Ajustado para el nuevo borde */
+        backface-visibility: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background: #2d2d2d;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        left: 0;
+        top: 0;
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+      }
+
+      .card-back {
+        transform: rotateY(180deg);
+        font-size: 0.9em;
+        line-height: 1.4;
+        color: #ffffff;
+      }
+
+      .card h2 {
+        color: #ffffff;
+        margin: 0;
+      }
+
+      .tools-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        z-index: 1000;
+        overflow-y: auto;
+      }
+
+      .tools-content {
+        position: relative;
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 20px;
+        background: #2d2d2d;
+        border-radius: 10px;
+        color: white;
+      }
+
+      .close-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+      }
+
+      .tool-item {
+        background: #3d3d3d;
+        margin: 10px 0;
+        padding: 15px;
+        border-radius: 5px;
+      }
+
+      .tool-item h3 {
+        margin: 0 0 10px 0;
+        color: #00a6ff;
+      }
+
+      .tool-item p {
+        margin: 0;
+        font-size: 0.9em;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>ToolBox de Facilitación</h1>
+
+    <div class="grid-container">
+      <div class="card">
+        <div class="card-inner">
+          <div class="card-front">
+            <h2>Diseño y Creatividad</h2>
+          </div>
+          <div class="card-back">
+            <p>
+              Herramientas para brainstorming, diseño visual, mapas mentales y
+              pensamiento creativo.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-inner">
+          <div class="card-front">
+            <h2>Gestión de Proyecto</h2>
+          </div>
+          <div class="card-back">
+            <p>
+              Herramientas para planificación, seguimiento y gestión de tareas
+              en equipo.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-inner">
+          <div class="card-front">
+            <h2>Evaluación en Real Time</h2>
+          </div>
+          <div class="card-back">
+            <p>
+              Herramientas para encuestas, votaciones y retroalimentación en
+              tiempo real.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-inner">
+          <div class="card-front">
+            <h2>Colaboración en Línea</h2>
+          </div>
+          <div class="card-back">
+            <p>
+              Plataformas para trabajo colaborativo, documentos compartidos y
+              espacios virtuales.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-inner">
+          <div class="card-front">
+            <h2>Comunicación y Reuniones</h2>
+          </div>
+          <div class="card-back">
+            <p>
+              Herramientas para videoconferencias, chat y comunicación efectiva.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-inner">
+          <div class="card-front">
+            <h2>Dinámicas Virtuales</h2>
+          </div>
+          <div class="card-back">
+            <p>
+              Actividades interactivas, juegos y ejercicios para grupos
+              virtuales.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-inner">
+          <div class="card-front">
+            <h2>Recursos</h2>
+          </div>
+          <div class="card-back">
+            <p>
+              Plantillas, guías y materiales para facilitar sesiones efectivas.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-inner">
+          <div class="card-front">
+            <h2>Documentación</h2>
+          </div>
+          <div class="card-back">
+            <p>
+              Herramientas para crear y compartir documentación colaborativa.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-inner">
+          <div class="card-front">
+            <h2>Herramientas</h2>
+          </div>
+          <div class="card-back">
+            <p>Utilidades y software especializado para facilitación.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="toolsOverlay" class="tools-overlay">
+      <div class="tools-content">
+        <button class="close-button" onclick="closeToolsOverlay()">
+          &times;
+        </button>
+        <h2 id="categoryTitle"></h2>
+        <div id="toolsList"></div>
+      </div>
+    </div>
+
+    <script>
+      const toolsData = {
+        "Diseño y Creatividad": [
+          {
+            name: "Miro",
+            description:
+              "Pizarra digital colaborativa para lluvia de ideas y diseño visual.",
+            link: "https://miro.com",
+          },
+          {
+            name: "Figma",
+            description: "Herramienta de diseño colaborativo en tiempo real.",
+            link: "https://figma.com",
+          },
+        ],
+        "Gestión de Proyecto": [
+          {
+            name: "Trello",
+            description:
+              "Gestión de tareas y proyectos con metodología Kanban.",
+            link: "https://trello.com",
+          },
+          {
+            name: "Asana",
+            description:
+              "Plataforma completa para gestión de proyectos y equipos.",
+            link: "https://asana.com",
+          },
+        ],
+        // Añadir más categorías según necesites
+      };
+
+      function showTools(category) {
+        const overlay = document.getElementById("toolsOverlay");
+        const title = document.getElementById("categoryTitle");
+        const toolsList = document.getElementById("toolsList");
+
+        title.textContent = category;
+        toolsList.innerHTML = "";
+
+        const tools = toolsData[category] || [];
+        tools.forEach((tool) => {
+          toolsList.innerHTML += `
+            <div class="tool-item">
+              <h3>${tool.name}</h3>
+              <p>${tool.description}</p>
+              <a href="${tool.link}" target="_blank" style="color: #00a6ff;">Visitar sitio</a>
+            </div>
+          `;
+        });
+
+        overlay.style.display = "block";
+      }
+
+      function closeToolsOverlay() {
+        document.getElementById("toolsOverlay").style.display = "none";
+      }
+
+      // Modificar los event listeners de las cards
+      document.querySelectorAll(".card").forEach((card) => {
+        card.addEventListener("click", function () {
+          const category = this.querySelector("h2").textContent;
+          showTools(category);
+        });
+      });
+    </script>
+  </body>
 </html>
