@@ -51,11 +51,8 @@ h1 {
   transition: all 0.3s ease;
 }
 
-.card:active .card-front,
-.card:active .card-back {
-  box-shadow: 0 0 20px rgba(0, 150, 255, 0.5);
-  border: 2px solid #00a6ff;
-  transform: scale(1.02);
+.card:hover .card-inner {
+  transform: rotateY(180deg);
 }
 
 .card-inner {
@@ -66,10 +63,6 @@ h1 {
   transition: transform 0.8s;
   transform-style: preserve-3d;
   transform-origin: center;
-}
-
-.card:hover .card-inner {
-  transform: rotateY(180deg);
 }
 
 .card-front,
